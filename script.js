@@ -1,0 +1,13 @@
+const preloader=document.getElementById('preloader');
+window.addEventListener('load',()=>setTimeout(()=>preloader.classList.add('hide'),450));
+const header=document.getElementById('header');
+window.addEventListener('scroll',()=>header.classList.toggle('scrolled',window.scrollY>30));
+const menuBtn=document.getElementById('menuBtn'), mobileMenu=document.getElementById('mobileMenu');
+menuBtn?.addEventListener('click',()=>{menuBtn.classList.toggle('open');mobileMenu.classList.toggle('open')});
+mobileMenu?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{menuBtn.classList.remove('open');mobileMenu.classList.remove('open')}));
+const dot=document.getElementById('cursorDot'), ring=document.getElementById('cursorRing');
+window.addEventListener('mousemove',e=>{if(dot){dot.style.left=e.clientX+'px';dot.style.top=e.clientY+'px'} if(ring){ring.style.left=e.clientX+'px';ring.style.top=e.clientY+'px'}});
+document.querySelectorAll('a,button,input,select,textarea').forEach(el=>el.addEventListener('mouseenter',()=>ring&&(ring.style.transform='translate(-50%,-50%) scale(1.55)')));
+document.querySelectorAll('a,button,input,select,textarea').forEach(el=>el.addEventListener('mouseleave',()=>ring&&(ring.style.transform='translate(-50%,-50%) scale(1)')));
+const form=document.getElementById('enquiryForm');
+form?.addEventListener('submit',e=>{e.preventDefault();const d=new FormData(form);const subject=encodeURIComponent('New project enquiry — SK Interiors');const body=encodeURIComponent(`Name: ${d.get('name')}\nPhone: ${d.get('phone')}\nProject type: ${d.get('type')}\n\nProject details:\n${d.get('message')}`);window.location.href=`mailto:solahm786.sg@gmail.com?subject=${subject}&body=${body}`;});
